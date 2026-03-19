@@ -40,12 +40,25 @@ class Expense {
       amount: json['amount'],
       date: DateTime.parse(json['date']),
       category: json['category'],
-      icon: IconData(
-        json['iconCodePoint'],
-        fontFamily: json['iconFontFamily'],
-        fontPackage: json['iconFontPackage'],
-      ),
+      icon: _getIconForCategory(json['category']),
       forWho: json['forWho'] ?? '',
     );
+  }
+
+  static IconData _getIconForCategory(String category) {
+    switch (category) {
+      case 'Food':
+        return Icons.restaurant;
+      case 'Transport':
+        return Icons.directions_car;
+      case 'Entertainment':
+        return Icons.movie;
+      case 'Shopping':
+        return Icons.shopping_bag;
+      case 'Bills':
+        return Icons.receipt;
+      default:
+        return Icons.category;
+    }
   }
 }
